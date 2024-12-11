@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "punch",
+	"version": "${version}",
+	"name": "punch",
+	"description": "Same crosshair rendering for all attack speeds.",
+	"authors": [
+		"safeliquids"
+	],
+	"contact": {
+		"homepage": "https://github.com/safeliquids/punch",
+		"sources": "https://github.com/safeliquids/punch"
+	},
+	"license": "MIT",
+	"icon": "assets/punch/icon.png",
+	"environment": "client",
+	"entrypoints":{
+		"client": [
+			"me.safeliquids.mcmods.punch.PunchClient"
+		]
+	},
+	"mixins": [
+		{
+			"config": "punch.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.20.4",
+		"java": ">=17"
+	}
+}
