@@ -3,7 +3,8 @@
 	"package": "me.safeliquids.mcmods.punch.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"CrosshairRenderingMixin"
+		"CrosshairRenderingMixin",
+		"IMinecraftClientAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1
