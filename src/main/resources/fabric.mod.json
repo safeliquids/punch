@@ -3,7 +3,7 @@
 	"id": "punch",
 	"version": "${version}",
 	"name": "punch",
-	"description": "Same crosshair rendering for all attack speeds.",
+	"description": "Lightly customized crosshair rendering.",
 	"authors": [
 		"safeliquids"
 	],
