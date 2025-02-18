@@ -1,0 +1,9 @@
+{
+  "enabled" : true,
+  "show_indicator_with_fast_weapon" : true,
+  "do_custom_indicator_sizes" : true,
+  "indicator_width" : 16,
+  "indicator_height" : 4,
+  "targeted_indicator_width" : 32,
+  "targeted_indicator_height" : 8
+}
