@@ -19,5 +19,6 @@ jobs:
     permissions:
       contents: read
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/workflows/gradle-build.yml
       - uses: ./.github/workflows/dependency-submission.yml
