@@ -22,3 +22,9 @@ jobs:
 
       - name: Build using Gradle
         run: gradle build
+
+      - name: Publish build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Latest Jar"
+          path: build/libs/punch-*.jar
