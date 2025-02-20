@@ -1,0 +1,17 @@
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/gradle-build.yml
+
+  dependencies:
+    permissions:
+      contents: write
+    uses: ./.github/workflows/dependency-submission.yml
+  
