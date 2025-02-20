@@ -20,5 +20,6 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/workflows/set-up-java-gradle.yml
       - uses: ./.github/workflows/gradle-build.yml
       - uses: ./.github/workflows/dependency-submission.yml
