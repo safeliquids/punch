@@ -44,5 +44,5 @@ jobs:
     - name: Publish latest jar
       uses: actions/upload-artifact/@v4
       with:
-        name: "Latest Jar"
-        path: "build/libs/punch-*.jar"
+        name: "punch-latest"
+        path: "build/libs/punch-[0-9]+(.[0-9]+)*-[0-9]+(.[0-9]+)*.jar"
