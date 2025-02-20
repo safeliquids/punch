@@ -45,4 +45,6 @@ jobs:
       uses: actions/upload-artifact/@v4
       with:
         name: "punch-latest"
-        path: "build/libs/punch-[0-9]+(.[0-9]+)*-[0-9]+(.[0-9]+)*.jar"
+        path: |
+          build/libs/punch-*.jar
+          !build/libs/punch-*-sources.jar
