@@ -6,11 +6,11 @@ on:
 
 jobs:
   build:
-    name: Build the jar and upload it as a job artifact
+    name: Build the jar and upload as job artifact
     uses: ./.github/workflows/gradle-build.yml
 
   add-jar:
-    name: Download the jar and upload it as a release artifact
+    name: Upload the jar as a release artifact
     runs-on: ubuntu-latest
     permissions:
       contents: write
