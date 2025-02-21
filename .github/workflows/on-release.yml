@@ -17,8 +17,17 @@ jobs:
         with:
           name: punch-latest
           path: ./artifacts/
-      - uses: actions/upload-artifact@v4
-        with:
-          path: artifacts/punch-*.jar
-          name: punch-latest-published
+      - id: get-jar-name
+        run: echo "jar-name=$(ls ./artifacts/punch-*.jar)" >> $GITHUB_OUTPUT
+      - run: echo "jar name is ${{ steps.get-jar-name.outputs.jar-name }}"
+      # - run: |
+      #     gh api \
+      #       --method POST \
+      #       -H "Accept: application/vnd.github+json" \
+      #       -H "Content-Type: application/java-archive" \
+      #       -H "X-GitHub-Api-Version: 2022-11-28" \
+      #       -H "User-Agent: ${{github.actor}}" \
+      #       --hostname "github.com" \
+      #       /repos/${{github.repository}}/releases/tag/${{github.ref_name}}/assets?name= \
+      #        -f @???
           
