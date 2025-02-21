@@ -27,14 +27,4 @@ jobs:
       - name: Add the jar as a release artifact
         env:
           GH_TOKEN: ${{github.token}}
-        run: |
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Content-Type: application/java-archive" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            -H "User-Agent: ${{github.actor}}" \
-            --hostname "github.com" \
-            /repos/${{github.repository}}/releases/tag/${{github.ref_name}}/assets?name=${{steps.get-jar-name.outputs.jar-name}} \
-             -f "@${{steps.get-jar-path.outputs.jar-path}}"
-          
+        run: gh release upload ${{github.ref_name}} ${{steps.get-jar-path.outputs.jar-path}}
