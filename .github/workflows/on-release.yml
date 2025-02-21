@@ -1,6 +1,6 @@
 on:
   release:
-    types: [ "published", "edited" ]
+    types: [ "published" ]
 
 jobs:
   build:
@@ -24,14 +24,14 @@ jobs:
       - id: get-jar-name
         run: echo "jar-name=$(basename ${{steps.get-jar-path.outputs.jar-path}})" >> $GITHUB_OUTPUT
       - run: echo "jar name is ${{ steps.get-jar-name.outputs.jar-name }}"
-      # - run: |
-      #     gh api \
-      #       --method POST \
-      #       -H "Accept: application/vnd.github+json" \
-      #       -H "Content-Type: application/java-archive" \
-      #       -H "X-GitHub-Api-Version: 2022-11-28" \
-      #       -H "User-Agent: ${{github.actor}}" \
-      #       --hostname "github.com" \
-      #       /repos/${{github.repository}}/releases/tag/${{github.ref_name}}/assets?name= \
-      #        -f @???
+      - run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Content-Type: application/java-archive" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "User-Agent: ${{github.actor}}" \
+            --hostname "github.com" \
+            /repos/${{github.repository}}/releases/tag/${{github.ref_name}}/assets?name=${{steps.get-jar-name.outputs.jar-name}} \
+             -f "@steps.get-jar-path.outputs.jar-path"
           
