@@ -20,7 +20,7 @@ jobs:
           path: ./artifacts/
       - id: get-jar-path
         run: echo "jar-path=$(ls ${{steps.download-latest-jar.outputs.download-path}}/punch-*.jar)" >> $GITHUB_OUTPUT
-      - run: echo "jar path: ${{steps.get-jar-path.outputs.jar-path}}"
+      - run: echo "jar path is ${{steps.get-jar-path.outputs.jar-path}}"
       - id: get-jar-name
         run: echo "jar-name=$(basename ${{steps.get-jar-path.outputs.jar-path}})" >> $GITHUB_OUTPUT
       - run: echo "jar name is ${{ steps.get-jar-name.outputs.jar-name }}"
