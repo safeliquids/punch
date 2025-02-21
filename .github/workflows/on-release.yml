@@ -13,12 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: mkdir artifacts
-      - uses: actions/download-artifact@v4
+      - id: download-latest-jar
+        uses: actions/download-artifact@v4
         with:
           name: punch-latest
           path: ./artifacts/
       - id: get-jar-name
-        run: echo "jar-name=$(ls ./artifacts/punch-*.jar)" >> $GITHUB_OUTPUT
+        run: echo "jar-name=$(basename ${{steps.download-latest-jar.outputs.download-path}})" >> $GITHUB_OUTPUT
       - run: echo "jar name is ${{ steps.get-jar-name.outputs.jar-name }}"
       # - run: |
       #     gh api \
