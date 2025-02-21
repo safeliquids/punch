@@ -1,0 +1,41 @@
+name: When a new release is published, build the mod jar and add it as a release artifact.
+
+on:
+  release:
+    types: [ "published" ]
+
+jobs:
+  build:
+    name: Build the jar and upload as job artifact
+    uses: ./.github/workflows/gradle-build.yml
+
+  add-jar:
+    name: Upload the jar as a release artifact
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: build
+    steps:
+      - name: Checkout the release tag
+        uses: actions/checkout@v4
+        
+      - run: mkdir artifacts
+      
+      - name: Download the jar that was just built
+        id: download-latest-jar
+        uses: actions/download-artifact@v4
+        with:
+          name: punch-latest
+          path: ./artifacts/
+      
+      - name: Construct a path to downloaded jar
+        id: get-jar-path
+        run: echo "jar-path=$(ls ${{steps.download-latest-jar.outputs.download-path}}/punch-*.jar)" >> $GITHUB_OUTPUT
+      
+      - name: Check the path
+        run: echo "jar path is ${{steps.get-jar-path.outputs.jar-path}}"
+      
+      - name: Add the jar as a release artifact
+        env:
+          GH_TOKEN: ${{github.token}}
+        run: gh release upload ${{github.ref_name}} ${{steps.get-jar-path.outputs.jar-path}}
