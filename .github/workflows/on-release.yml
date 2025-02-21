@@ -36,5 +36,5 @@ jobs:
             -H "User-Agent: ${{github.actor}}" \
             --hostname "github.com" \
             /repos/${{github.repository}}/releases/tag/${{github.ref_name}}/assets?name=${{steps.get-jar-name.outputs.jar-name}} \
-             -f "@steps.get-jar-path.outputs.jar-path"
+             -f "@${{steps.get-jar-path.outputs.jar-path}}"
           
