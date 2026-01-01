@@ -71,9 +71,11 @@ file  showing the default config can be  found [here](./examples/punch.json).
 
 ## Building
 Check [Releases](https://github.com/safeliquids/punch/releases) for pre-built
-jars. Otherwise this mod can be build using [Gradle](https://gradle.org/)
+jars. Otherwise this mod can be built using [Gradle Wrapper](https://gradle.org/)
+like so (on Linux)
 ``` console
-> gradle build
+> chmod +x ./gradlew
+> ./gradlew build
 ``` 
 
 ## Acknowledgements
