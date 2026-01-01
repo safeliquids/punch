@@ -11,14 +11,14 @@ Unmodified, the client renders the crosshair at specific hard-coded dimensions.
 Specifically the attack cooldown texture (here called "attack indicator" or
 simply "indicator") is 16 pixels wide. This mod allows that width
 be changed. Additionally, custom width can change when the crosshair is aimed
-at an entity.
-
-By default, this feature is enabled with the following custom sizes:
+at an entity. By default, this feature is enabled with the following custom
+sizes:
 
 | when                      | size (width x height) |
 |:--------------------------|:----------------------|
 | normally                  | 16 x 4 (Vanilla)      |
 | when looking at an entity | 32 x 8 (twice as big) |
+
 These properties can be configured in the configuration file (see below) using
 the keys `"indicator_width"`, `"indicator_height"`, `"targetied_indicator_width"`
 and `"targeted_indicator_height"`. The whole feature can be enabled or disabled
