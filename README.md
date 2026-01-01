@@ -1,7 +1,7 @@
 # punch
 `punch` is a mod for [Minecraft](https://www.minecraft.net/): Java Edition that
 changes the rendering of the crosshair in first-person view. Compatible game
-versions are `1.20` through `1.20.4`. This mod targets the fabric loader and
+versions are `1.20.2` through `1.20.4`. This mod targets the fabric loader and
 support for other platforms is not planned.
 
 ## Features
