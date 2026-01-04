@@ -58,7 +58,7 @@ public abstract class CrosshairRenderingMixin {
         allow=1,
         require=1)
     private float onGetAttackCooldownProgressPerTick(ClientPlayerEntity instance, Operation<Float> original) {
-        if (mConfig != null && mConfig.mShowIndicatorWithFastWeapon) {
+        if (mConfig != null && mConfig.show_indicator_with_fast_weapon) {
             return 100f;
         }
         return original.call(instance);
@@ -81,8 +81,8 @@ public abstract class CrosshairRenderingMixin {
     private void onDrawFullAttackIndicator(
         DrawContext instance, Identifier texture, int x, int y, int width,  int height, Operation<Void> original)
     {
-        if (mConfig != null && mConfig.mEnabled && mConfig.mDoCustomIndicatorSizes) {
-            width = mConfig.mTargetedIndicatorWidth;
+        if (mConfig != null && mConfig.enabled && mConfig.do_custom_indicator_sizes) {
+            width = mConfig.targeted_indicator_width;
             // this is not a mistake, the full indicator texture is a square
             height = width;
             // The x-position of the attack indicator is moved to the left of the center of the screen by half its
@@ -112,18 +112,18 @@ public abstract class CrosshairRenderingMixin {
     private void onDrawAttackIndicatorBackground(
         DrawContext instance, Identifier texture, int x, int y, int width,  int height, Operation<Void> original)
     {
-        if (mConfig == null || !mConfig.mEnabled || !mConfig.mDoCustomIndicatorSizes) {
+        if (mConfig == null || !mConfig.enabled || !mConfig.do_custom_indicator_sizes) {
             original.call(instance, texture, x, y, width, height);
             return;
         }
         final MinecraftClient client = ((IMinecraftClientAccessor) this).getClient();
         if (client.targetedEntity != null && client.targetedEntity instanceof LivingEntity) {
-            width = mConfig.mTargetedIndicatorWidth;
-            height = mConfig.mTargetedIndicatorHeight;
+            width = mConfig.targeted_indicator_width;
+            height = mConfig.targeted_indicator_height;
         }
         else {
-            width = mConfig.mIndicatorWidth;
-            height = mConfig.mIndicatorHeight;
+            width = mConfig.indicator_width;
+            height = mConfig.indicator_height;
         }
         x = x + 8 - (width / 2);
         original.call(instance, texture, x, y, width, height);
@@ -148,18 +148,18 @@ public abstract class CrosshairRenderingMixin {
         DrawContext instance, Identifier texture, int texture_width, int texture_height, int start_u, int start_v,
         int x, int y, int width, int height, Operation<Void> original)
     {
-        if (mConfig == null || !mConfig.mEnabled || !mConfig.mDoCustomIndicatorSizes) {
+        if (mConfig == null || !mConfig.enabled || !mConfig.do_custom_indicator_sizes) {
             original.call(instance, texture, texture_width, texture_height, start_u, start_v, x, y, width, height);
             return;
         }
         final MinecraftClient client = ((IMinecraftClientAccessor) this).getClient();
         if (client.targetedEntity != null && client.targetedEntity instanceof LivingEntity) {
-            texture_width = mConfig.mTargetedIndicatorWidth;
-            texture_height = mConfig.mTargetedIndicatorHeight;
+            texture_width = mConfig.targeted_indicator_width;
+            texture_height = mConfig.targeted_indicator_height;
         }
         else {
-            texture_width = mConfig.mIndicatorWidth;
-            texture_height = mConfig.mIndicatorHeight;
+            texture_width = mConfig.indicator_width;
+            texture_height = mConfig.indicator_height;
         }
         x = x + 8 - (texture_width / 2);
         final float f = client.player.getAttackCooldownProgress(0.0F);
