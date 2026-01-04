@@ -1,6 +1,7 @@
 package me.safeliquids.mcmods.punch.mixin.client;
 
 import me.safeliquids.mcmods.punch.PunchClient;
+import me.safeliquids.mcmods.punch.ConfigData;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public abstract class CrosshairRenderingMixin {
-    private PunchClient.Config mConfig = null;
+    private ConfigData mConfig = null;
 
     /**
      * Caches current mod configuration.
@@ -26,7 +27,7 @@ public abstract class CrosshairRenderingMixin {
         method="renderCrosshair(Lnet/minecraft/client/gui/DrawContext;)V",
         at=@At("HEAD"))
     private void onRenderCrosshair(DrawContext context, CallbackInfo ci) {
-        PunchClient.Config newConfig = PunchClient.getConfig();
+        ConfigData newConfig = PunchClient.getConfig();
         if (mConfig == null || mConfig != newConfig) {
             mConfig = newConfig;
         }
