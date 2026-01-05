@@ -29,8 +29,8 @@ public class PunchClient implements ClientModInitializer {
         sConfig = readConfig();
         if (sConfig == null) {
             sConfig = ConfigData.makeDefault();
-            writeConfig(sConfig);
         }
+        writeConfig(sConfig);
     }
 
     public static ConfigData getConfig() {

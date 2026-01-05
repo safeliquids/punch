@@ -38,36 +38,36 @@ a single object with several keys. Keys are described below and an  example
 file  showing the default config can be  found [here](./examples/punch.json).
 
 ### Configuration Keys
-- **"enabled":** ***boolean, default `true`***
-  
-  Enables or disables all features. When `false`, the mod does not change 
-  vanilla behaviour.
+- **"enabled":** ***boolean, default `true`***  
+    Enables or disables all features. When `false`, the mod does not change 
+    vanilla behaviour.
 
-- **"show_indicator_with_fast_weapon":** ***boolean, default `true`***
-  
-  Enables rendering the "full" indicator texture  regardless of attack speed of
-  the player's weapon. This texture is only shown when the attack cooldown is
-  fully recovered.
+- **"show_indicator_with_fast_weapon":** ***boolean, default `true`***  
+    Enables rendering the "full" indicator texture  regardless of attack speed
+    of the player's weapon. This texture is only shown when the attack cooldown
+    is fully recovered.
 
-- **"do_custom_indicator_sizes":** ***boolean, default`true`***
-  
-  Enables custom attack indicator sizes.                          
-
-- **"indicator_width":** ***positive whole number, default 16***
-  
-  Normal width of the attack indicator                                      
-
-- **"indicator_height":** ***positive whole number, default 4***
-  
-  Normal height of the attack indicator                                     
-
-- **"targeted_indicator_width":** ***positive whole number, default 32***
-  
-  Width of the indicator when looking at an entity     
-
-- **"targeted_indicator_height":** ***positive whole number, default 8***
-  
-  Height of the indicator when looking at an entity    
+- **"custom_indicator_sizes":** ***object, optional***  
+    Configures custom attack indicator sizes. Following fields are within.  
+    - **"enabled":** ***boolean, default `true`***  
+        Enables or disables custom indicator sizes.
+    - **"target_partial":** ***object, optional***  
+        Contains dimensions of the 'charging' attack indicator when targeting
+        an entity.
+        - **"width":** ***positive integer, default `32`***  
+        - **"height":** ***positive integer, default `8`***
+    
+    - **"target_full":** ***object, optional***  
+        Contains dimensions of the 'full' attack indicator when targeting
+        an entity.
+        - **"width":** ***positive integer, default `32`***
+        - **"height":** ***positive integer, default `32`***
+    
+    - **"normal_partial":** ***object, optional***  
+        Contains dimensions of the attack indicator when *not* targeting
+        an entity.
+        - **"width":** ***positive integer, default `16`***
+        - **"height":** ***positive integer, default `4`***
 
 ## Building
 Check [Releases](https://github.com/safeliquids/punch/releases) for pre-built

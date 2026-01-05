@@ -1,9 +1,19 @@
 {
-  "enabled" : true,
-  "show_indicator_with_fast_weapon" : true,
-  "do_custom_indicator_sizes" : true,
-  "indicator_width" : 16,
-  "indicator_height" : 4,
-  "targeted_indicator_width" : 32,
-  "targeted_indicator_height" : 8
+  "enabled": true,
+  "show_indicator_with_fast_weapon": true,
+  "custom_indicator_sizes": {
+    "enabled": true,
+    "target_partial": {
+      "width": 32,
+      "height": 8
+    },
+    "target_full": {
+      "width": 32,
+      "height": 32
+    },
+    "normal_partial": {
+      "width": 16,
+      "height": 4
+    }
+  }
 }
