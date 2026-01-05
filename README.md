@@ -14,15 +14,13 @@ be changed. Additionally, custom width can change when the crosshair is aimed
 at an entity. By default, this feature is enabled with the following custom
 sizes:
 
-| when                      | size (width x height) |
-|:--------------------------|:----------------------|
-| normally                  | 16 x 4 (Vanilla)      |
-| when looking at an entity | 32 x 8 (twice as big) |
+| when                      | size (width x height)        |
+|:--------------------------|:-----------------------------|
+| normally                  | 16 $\times$ 4 (Vanilla)      |
+| when looking at an entity | 32 $\times$ 8 (twice as big) |
 
-These properties can be configured in the configuration file (see below) using
-the keys `"indicator_width"`, `"indicator_height"`, `"targetied_indicator_width"`
-and `"targeted_indicator_height"`. The whole feature can be enabled or disabled
-using `"do_custom_indicator_sizes"`.
+These properties can be configured in the configuration file
+[as described below](#configuratoin).
 
 ### Full Attack Indicator
 Unmodified, the client renders the "full" attack indicator texture (normally
@@ -32,10 +30,10 @@ enabled or disabled in the configuration file (see below) using the key
 `"show_indicator_with_fast_weapon""`.
 
 ## Configuration
-Features can be configured using a configuration file `.minecraft/config/punch.json`.
-This file is in [JSON](https://en.wikipedia.org/wiki/JSON) format and contains
-a single object with several keys. Keys are described below and an  example
-file  showing the default config can be  found [here](./examples/punch.json).
+Features can be configured using a configuration file `.minecraft/config/punch.json`
+written in [JSON](https://en.wikipedia.org/wiki/JSON) format. For an example see
+[the default configuration](./examples/punch.json). Detailed description of the
+configuration follows.
 
 ### Configuration Keys
 - **"enabled":** ***boolean, default `true`***  
@@ -71,12 +69,18 @@ file  showing the default config can be  found [here](./examples/punch.json).
 
 ## Building
 Check [Releases](https://github.com/safeliquids/punch/releases) for pre-built
-jars. Otherwise this mod can be built using [Gradle Wrapper](https://gradle.org/)
-like so (on Linux)
+jars. Otherwise this mod can be built using [Gradle Wrapper](https://gradle.org/).
+
+**Linux:**
 ``` console
 > chmod +x ./gradlew
 > ./gradlew build
 ``` 
+
+**Windos:**
+``` console
+> .\gradlew.bat build
+```
 
 ## Acknowledgements
 This project extends a template created using the
