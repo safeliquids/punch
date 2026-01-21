@@ -1,7 +1,7 @@
 package me.safeliquids.mcmods.punch.mixin.client;
 
 import me.safeliquids.mcmods.punch.PunchClient;
-import me.safeliquids.mcmods.punch.ConfigData;
+import me.safeliquids.mcmods.punch.config.ConfigData;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;

@@ -1,5 +1,7 @@
 package me.safeliquids.mcmods.punch;
 
+import me.safeliquids.mcmods.punch.config.ConfigData;
+
 import net.fabricmc.api.ClientModInitializer;
 
 import com.google.gson.Gson;
@@ -28,7 +30,7 @@ public class PunchClient implements ClientModInitializer {
         sGson = new GsonBuilder().setPrettyPrinting().create();
         sConfig = readConfig();
         if (sConfig == null) {
-            sConfig = ConfigData.makeDefault();
+            sConfig = new ConfigData();
         }
         writeConfig(sConfig);
     }
