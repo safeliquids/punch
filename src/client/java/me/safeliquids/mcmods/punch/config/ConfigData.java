@@ -8,23 +8,23 @@ public class ConfigData {
     public static final boolean DEFAULT_SHOW_INDICATOR_WITH_FAST_WEAPON = true;
 
     // === PUBLIC MEMBERS =====================================================
-    public final boolean enabled;
-    public final boolean show_indicator_with_fast_weapon;
-    public final CustomIndicatorSizes custom_indicator_sizes;
+    public final boolean mEnabled;
+    public final boolean mFastWeapon;
+    public final CustomIndicatorSizes mCustomIndicatorSizes;
 
     // === PUBLIC METHODS =====================================================
     public ConfigData() {
-        enabled = DEFAULT_ENABLED;
-        show_indicator_with_fast_weapon = DEFAULT_SHOW_INDICATOR_WITH_FAST_WEAPON;
-        custom_indicator_sizes = new CustomIndicatorSizes();
+        mEnabled = DEFAULT_ENABLED;
+        mFastWeapon = DEFAULT_SHOW_INDICATOR_WITH_FAST_WEAPON;
+        mCustomIndicatorSizes = new CustomIndicatorSizes();
     }
 
     public ConfigData(
         boolean is_enabled, boolean fast_weapon, CustomIndicatorSizes custom_sizes)
     {
-        enabled = is_enabled;
-        show_indicator_with_fast_weapon = fast_weapon;
-        custom_indicator_sizes = custom_sizes;
+        mEnabled = is_enabled;
+        mFastWeapon = fast_weapon;
+        mCustomIndicatorSizes = custom_sizes;
     }
 
     public static ConfigData sanitize(ConfigData other) {
@@ -32,11 +32,11 @@ public class ConfigData {
             return new ConfigData();  // idk if this is good at all
         }
 
-        CustomIndicatorSizes sanitized_sizes = CustomIndicatorSizes.sanitize(other.custom_indicator_sizes);
-        if (sanitized_sizes == other.custom_indicator_sizes) {
+        CustomIndicatorSizes sanitized_sizes = CustomIndicatorSizes.sanitize(other.mCustomIndicatorSizes);
+        if (sanitized_sizes == other.mCustomIndicatorSizes) {
             return other;
         }
 
-        return new ConfigData(other.enabled, other.show_indicator_with_fast_weapon, sanitized_sizes);
+        return new ConfigData(other.mEnabled, other.mFastWeapon, sanitized_sizes);
     }
 }

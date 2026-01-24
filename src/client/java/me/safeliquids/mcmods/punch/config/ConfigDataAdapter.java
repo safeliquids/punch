@@ -4,8 +4,6 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-// TODO: renaming members of config data classes to something more sensible
-
 public class ConfigDataAdapter implements JsonSerializer<ConfigData>, JsonDeserializer<ConfigData> {
     public static final String KEY_ENABLED = "enabled";
     public static final String KEY_FASTWEAPON = "show_indicator_with_fast_weapon";
@@ -13,11 +11,11 @@ public class ConfigDataAdapter implements JsonSerializer<ConfigData>, JsonDeseri
 
     public JsonElement serialize(ConfigData config_data, Type type, JsonSerializationContext context) {
         JsonObject result = new JsonObject();
-        result.addProperty(KEY_ENABLED, config_data.enabled);
-        result.addProperty(KEY_FASTWEAPON, config_data.show_indicator_with_fast_weapon);
+        result.addProperty(KEY_ENABLED, config_data.mEnabled);
+        result.addProperty(KEY_FASTWEAPON, config_data.mFastWeapon);
 
         JsonElement custom_sizes = context.serialize(
-            config_data.custom_indicator_sizes, CustomIndicatorSizes.class);
+            config_data.mCustomIndicatorSizes, CustomIndicatorSizes.class);
         result.add(KEY_INDICATOR_SIZES, custom_sizes);
         return result;
     }

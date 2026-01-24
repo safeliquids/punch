@@ -16,10 +16,10 @@ public class CustomIndicatorSizesAdapter
 
     public JsonElement serialize(CustomIndicatorSizes sizes, Type type_of_sizes, JsonSerializationContext context) {
         JsonObject result = new JsonObject();
-        result.addProperty(KEY_ENABLED, sizes.enabled);
-        result.add(KEY_TARGET_PARTIAL, serializeSize(sizes.target_partial));
-        result.add(KEY_TARGET_FULL, serializeSize(sizes.target_full));
-        result.add(KEY_NORMAL_PARTIAL, serializeSize(sizes.normal_partial));
+        result.addProperty(KEY_ENABLED, sizes.mEnabled);
+        result.add(KEY_TARGET_PARTIAL, serializeSize(sizes.mTargetPartial));
+        result.add(KEY_TARGET_FULL, serializeSize(sizes.mTargetFull));
+        result.add(KEY_NORMAL_PARTIAL, serializeSize(sizes.mNormalPartial));
         return result;
     }
 
@@ -47,8 +47,8 @@ public class CustomIndicatorSizesAdapter
     // === PRIVATE METHODS ====================================================
     JsonElement serializeSize(CustomIndicatorSizes.Size size) {
         JsonObject result = new JsonObject();
-        result.addProperty(KEY_WIDTH, size.width);
-        result.addProperty(KEY_HEIGHT, size.height);
+        result.addProperty(KEY_WIDTH, size.mWidth);
+        result.addProperty(KEY_HEIGHT, size.mHeight);
         return result;
     }
 
