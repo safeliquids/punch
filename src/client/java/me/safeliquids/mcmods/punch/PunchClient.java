@@ -1,6 +1,9 @@
 package me.safeliquids.mcmods.punch;
 
 import me.safeliquids.mcmods.punch.config.ConfigData;
+import me.safeliquids.mcmods.punch.config.ConfigDataAdapter;
+import me.safeliquids.mcmods.punch.config.CustomIndicatorSizes;
+import me.safeliquids.mcmods.punch.config.CustomIndicatorSizesAdapter;
 
 import net.fabricmc.api.ClientModInitializer;
 
@@ -27,7 +30,14 @@ public class PunchClient implements ClientModInitializer {
     public void onInitializeClient() {
         LOGGER.info("loading punch mod");
         // construct static Gson instance with pretty printing
-        sGson = new GsonBuilder().setPrettyPrinting().create();
+        // also configure serializers and deserializers for config classes
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        builder.registerTypeAdapter(ConfigData.class, new ConfigDataAdapter());
+        builder.registerTypeAdapter(CustomIndicatorSizes.class, new CustomIndicatorSizesAdapter());
+
+        sGson = builder.create();
+
         sConfig = readConfig();
         if (sConfig == null) {
             sConfig = new ConfigData();
@@ -61,15 +71,7 @@ public class PunchClient implements ClientModInitializer {
             LOGGER.warn("error reading from config file");
         }
 
-        if ( config == null ) {
-            return null;
-        }
-
-        ConfigData sanitizedConfig = ConfigData.sanitize(config);
-        if (config != sanitizedConfig) {
-            LOGGER.warn("Invalid entries in config file; replacing with defaults");
-        }
-        return sanitizedConfig;
+        return config;
     }
 
     private void writeConfig(ConfigData config) {

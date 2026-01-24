@@ -17,7 +17,7 @@ public class CustomIndicatorSizes {
     }
 
     // === DEFAULTS (STATIC) ==================================================
-    public static final boolean DEFAULT_DO_CUSTOM_INDICATOR_SIZES = true;
+    public static final boolean DEFAULT_ENABLED = true;
     public static final int DEFAULT_TARGET_PARTIAL_WIDTH = 32;
     public static final int DEFAULT_TARGET_PARTIAL_HEIGHT = 8;
     public static final int DEFAULT_TARGET_FULL_WIDTH = 32;
@@ -33,7 +33,7 @@ public class CustomIndicatorSizes {
 
     // === PUBLIC METHODS =====================================================
     public CustomIndicatorSizes() {
-        enabled = DEFAULT_DO_CUSTOM_INDICATOR_SIZES;
+        enabled = DEFAULT_ENABLED;
         target_partial = new Size(DEFAULT_TARGET_PARTIAL_WIDTH, DEFAULT_TARGET_PARTIAL_HEIGHT);
         target_full = new Size(DEFAULT_TARGET_FULL_WIDTH, DEFAULT_TARGET_FULL_HEIGHT);
         normal_partial = new Size(DEFAULT_NORMAL_PARTIAL_WIDTH, DEFAULT_NORMAL_PARTIAL_HEIGHT);
