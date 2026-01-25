@@ -1,0 +1,13 @@
+{
+    "title.punch.config": "Punch Configuration",
+    "title.punch.category.main": "Main Configuration",
+    "option.punch.enabled": "Enabled",
+    "option.punch.fast_weapon": "Show Attack Indicator With Fast Weapon",
+    "option.punch.custom_sizes.enabled": "Do Custom Attack Indicator Sizes",
+    "option.punch.custom_sizes.normal_partial_width": "Attack Indicator Width",
+    "option.punch.custom_sizes.normal_partial_height": "Attack Indicator Height",
+    "option.punch.custom_sizes.target_partial_width": "Targeting Attack Indicator Width",
+    "option.punch.custom_sizes.target_partial_height": "Targeting Attack Indicator Height",
+    "option.punch.custom_sizes.target_full_width": "Full Attack Indicator Width",
+    "option.punch.custom_sizes.target_full_height": "Full Attack Indicator Height"
+}

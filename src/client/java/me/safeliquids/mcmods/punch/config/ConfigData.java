@@ -8,9 +8,9 @@ public class ConfigData {
     public static final boolean DEFAULT_SHOW_INDICATOR_WITH_FAST_WEAPON = true;
 
     // === PUBLIC MEMBERS =====================================================
-    public final boolean mEnabled;
-    public final boolean mFastWeapon;
-    public final CustomIndicatorSizes mCustomIndicatorSizes;
+    public boolean mEnabled;
+    public boolean mFastWeapon;
+    public CustomIndicatorSizes mCustomIndicatorSizes;
 
     // === PUBLIC METHODS =====================================================
     public ConfigData() {

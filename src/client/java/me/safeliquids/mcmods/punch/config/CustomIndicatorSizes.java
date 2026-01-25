@@ -3,8 +3,8 @@ package me.safeliquids.mcmods.punch.config;
 public class CustomIndicatorSizes {
     // === NESTED TYPES =======================================================
     public static class Size {
-        public final int mWidth;
-        public final int mHeight;
+        public int mWidth;
+        public int mHeight;
 
         public Size() {
             mWidth = mHeight = -1;
@@ -15,7 +15,7 @@ public class CustomIndicatorSizes {
             mHeight = h;
         }
     }
-
+    
     // === DEFAULTS (STATIC) ==================================================
     public static final boolean DEFAULT_ENABLED = true;
     public static final int DEFAULT_TARGET_PARTIAL_WIDTH = 32;
@@ -26,10 +26,10 @@ public class CustomIndicatorSizes {
     public static final int DEFAULT_NORMAL_PARTIAL_HEIGHT = 4;
 
     // === PUBLIC MEMBERS =====================================================
-    public final boolean mEnabled;
-    public final Size mTargetPartial;
-    public final Size mTargetFull;
-    public final Size mNormalPartial;
+    public boolean mEnabled;
+    public Size mTargetPartial;
+    public Size mTargetFull;
+    public Size mNormalPartial;
 
     // === PUBLIC METHODS =====================================================
     public CustomIndicatorSizes() {

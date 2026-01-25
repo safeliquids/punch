@@ -49,7 +49,11 @@ public class PunchClient implements ClientModInitializer {
         return sConfig;
     }
 
-    private ConfigData readConfig() {
+    public static void setConfig(ConfigData other) {
+        sConfig = ConfigData.sanitize(other);
+    }
+
+    public static ConfigData readConfig() {
         if (!canReadConfigFile()) {
             LOGGER.info("Config file is not available");
             return null;
@@ -74,7 +78,7 @@ public class PunchClient implements ClientModInitializer {
         return config;
     }
 
-    private void writeConfig(ConfigData config) {
+    public static void writeConfig(ConfigData config) {
         if (config == null) {
             return;
         }
@@ -102,12 +106,12 @@ public class PunchClient implements ClientModInitializer {
         }
     }
 
-    private boolean canReadConfigFile() {
+    private static boolean canReadConfigFile() {
         return Files.exists(CONFIG_FILE_PATH)
             && Files.isRegularFile(CONFIG_FILE_PATH) && Files.isReadable(CONFIG_FILE_PATH);
     }
 
-    private boolean canWriteConfigFile() {
+    private static boolean canWriteConfigFile() {
         return Files.exists(CONFIG_FILE_PATH)
             && Files.isRegularFile(CONFIG_FILE_PATH) && Files.isWritable(CONFIG_FILE_PATH);
     }
