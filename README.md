@@ -30,8 +30,10 @@ enabled or disabled in the configuration file (see below) using the key
 `"show_indicator_with_fast_weapon""`.
 
 ## Configuration
-Features can be configured using a configuration file `.minecraft/config/punch.json`
-written in [JSON](https://en.wikipedia.org/wiki/JSON) format. For an example see
+It is recommended to use [Mod Menu](https://modrinth.com/mod/modmenu)
+and [Cloth Config](https://modrinth.com/mod/cloth-config) to configure this mod
+in-game. Otherwise the file `.minecraft/config/punch.json` can be edited
+manually *before launching the game*. For an example see
 [the default configuration](./examples/punch.json). Detailed description of the
 configuration follows.
 
