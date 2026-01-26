@@ -8,9 +8,9 @@ public class ConfigData {
     public static final boolean DEFAULT_SHOW_INDICATOR_WITH_FAST_WEAPON = true;
 
     // === PUBLIC MEMBERS =====================================================
-    public boolean mEnabled;
-    public boolean mFastWeapon;
-    public CustomIndicatorSizes mCustomIndicatorSizes;
+    boolean mEnabled;
+    boolean mFastWeapon;
+    CustomIndicatorSizes mCustomIndicatorSizes;
 
     // === PUBLIC METHODS =====================================================
     public ConfigData() {
@@ -25,6 +25,18 @@ public class ConfigData {
         mEnabled = is_enabled;
         mFastWeapon = fast_weapon;
         mCustomIndicatorSizes = custom_sizes;
+    }
+
+    public boolean getEnabled() {
+        return mEnabled;
+    }
+
+    public boolean getFastWeapon() {
+        return mEnabled;
+    }
+
+    public CustomIndicatorSizes getCustomIndicatorSizes() {
+        return mCustomIndicatorSizes;
     }
 
     public static ConfigData sanitize(ConfigData other) {

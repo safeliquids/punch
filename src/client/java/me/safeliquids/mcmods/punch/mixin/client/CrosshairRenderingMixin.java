@@ -2,6 +2,7 @@ package me.safeliquids.mcmods.punch.mixin.client;
 
 import me.safeliquids.mcmods.punch.PunchClient;
 import me.safeliquids.mcmods.punch.config.ConfigData;
+import me.safeliquids.mcmods.punch.config.CustomIndicatorSizes;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
@@ -59,7 +60,7 @@ public abstract class CrosshairRenderingMixin {
         allow=1,
         require=1)
     private float onGetAttackCooldownProgressPerTick(ClientPlayerEntity instance, Operation<Float> original) {
-        if (mConfig != null && mConfig.mFastWeapon) {
+        if (mConfig != null && mConfig.getFastWeapon()) {
             return 100f;
         }
         return original.call(instance);
@@ -82,17 +83,24 @@ public abstract class CrosshairRenderingMixin {
     private void onDrawFullAttackIndicator(
         DrawContext instance, Identifier texture, int x, int y, int width,  int height, Operation<Void> original)
     {
-        if (mConfig != null && mConfig.mEnabled && mConfig.mCustomIndicatorSizes.mEnabled) {
-            width = mConfig.mCustomIndicatorSizes.mTargetFull.mWidth;
-            // this is not a mistake, the full indicator texture is a square
-            height = mConfig.mCustomIndicatorSizes.mTargetFull.mHeight;
-            // The x-position of the attack indicator is moved to the left of the center of the screen by half its
-            // width. This line removes the hard-coded offset in Minecraft's code (8 because the vanilla width is 16)
-            // and replaces it with a corresponding offset based on the custom width. (Here that is
-            // TargetedIndicatorWidth since the "full" texture is only shown when targeting something. In the other
-            // methods it is either the normal or targeted width.)
-            x = x + 8 - (width / 2);
+        if (mConfig == null || !mConfig.getEnabled()) {
+            original.call(instance, texture, x, y, width, height);
+            return;
         }
+        CustomIndicatorSizes cis = mConfig.getCustomIndicatorSizes();
+        if (!cis.getEnabled()) {
+            original.call(instance, texture, x, y, width, height);
+            return;
+        }
+        CustomIndicatorSizes.Size target_full = cis.getTargetFull();
+        width = target_full.getWidth();
+        height = target_full.getHeight();
+        // The x-position of the attack indicator is moved to the left of the center of the screen by half its
+        // width. This line removes the hard-coded offset in Minecraft's code (8 because the vanilla width is 16)
+        // and replaces it with a corresponding offset based on the custom width. (Here that is
+        // TargetedIndicatorWidth since the "full" texture is only shown when targeting something. In the other
+        // methods it is either the normal or targeted width.)
+        x = x + 8 - (width / 2);
         original.call(instance, texture, x, y, width, height);
     }
 
@@ -113,19 +121,26 @@ public abstract class CrosshairRenderingMixin {
     private void onDrawAttackIndicatorBackground(
         DrawContext instance, Identifier texture, int x, int y, int width,  int height, Operation<Void> original)
     {
-        if (mConfig == null || !mConfig.mEnabled || !mConfig.mCustomIndicatorSizes.mEnabled) {
+        if (mConfig == null || !mConfig.getEnabled()) {
             original.call(instance, texture, x, y, width, height);
             return;
         }
+        CustomIndicatorSizes cis = mConfig.getCustomIndicatorSizes();
+        if (!cis.getEnabled()) {
+            original.call(instance, texture, x, y, width, height);
+            return;
+        }
+
+        CustomIndicatorSizes.Size size;
         final MinecraftClient client = ((IMinecraftClientAccessor) this).getClient();
         if (client.targetedEntity != null && client.targetedEntity instanceof LivingEntity) {
-            width = mConfig.mCustomIndicatorSizes.mTargetPartial.mWidth;
-            height = mConfig.mCustomIndicatorSizes.mTargetPartial.mHeight;
+            size = cis.getTargetPartial();
         }
         else {
-            width = mConfig.mCustomIndicatorSizes.mNormalPartial.mWidth;
-            height = mConfig.mCustomIndicatorSizes.mNormalPartial.mHeight;
+            size = cis.getNormalPartial();
         }
+        width = size.getWidth();
+        height = size.getHeight();
         x = x + 8 - (width / 2);
         original.call(instance, texture, x, y, width, height);
     }
@@ -149,19 +164,26 @@ public abstract class CrosshairRenderingMixin {
         DrawContext instance, Identifier texture, int texture_width, int texture_height, int start_u, int start_v,
         int x, int y, int width, int height, Operation<Void> original)
     {
-        if (mConfig == null || !mConfig.mEnabled || !mConfig.mCustomIndicatorSizes.mEnabled) {
+        if (mConfig == null || !mConfig.getEnabled()) {
             original.call(instance, texture, texture_width, texture_height, start_u, start_v, x, y, width, height);
             return;
         }
+        CustomIndicatorSizes cis = mConfig.getCustomIndicatorSizes();
+        if (!cis.getEnabled()) {
+            original.call(instance, texture, texture_width, texture_height, start_u, start_v, x, y, width, height);
+            return;
+        }
+
+        CustomIndicatorSizes.Size size;
         final MinecraftClient client = ((IMinecraftClientAccessor) this).getClient();
         if (client.targetedEntity != null && client.targetedEntity instanceof LivingEntity) {
-            texture_width = mConfig.mCustomIndicatorSizes.mTargetPartial.mWidth;
-            texture_height = mConfig.mCustomIndicatorSizes.mTargetPartial.mHeight;
+            size = cis.getTargetPartial();
         }
         else {
-            texture_width = mConfig.mCustomIndicatorSizes.mNormalPartial.mWidth;
-            texture_height = mConfig.mCustomIndicatorSizes.mNormalPartial.mHeight;
+            size = cis.getNormalPartial();
         }
+        texture_width = size.getWidth();
+        texture_height = size.getHeight();
         x = x + 8 - (texture_width / 2);
         final float f = client.player.getAttackCooldownProgress(0.0F);
         width = (int) (f * texture_width);

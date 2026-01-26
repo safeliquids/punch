@@ -3,8 +3,8 @@ package me.safeliquids.mcmods.punch.config;
 public class CustomIndicatorSizes {
     // === NESTED TYPES =======================================================
     public static class Size {
-        public int mWidth;
-        public int mHeight;
+        int mWidth;
+        int mHeight;
 
         public Size() {
             mWidth = mHeight = -1;
@@ -13,6 +13,14 @@ public class CustomIndicatorSizes {
         public Size(int w, int h) {
             mWidth = w;
             mHeight = h;
+        }
+
+        public int getWidth() {
+            return mWidth;
+        }
+
+        public int getHeight() {
+            return mHeight;
         }
     }
     
@@ -26,10 +34,10 @@ public class CustomIndicatorSizes {
     public static final int DEFAULT_NORMAL_PARTIAL_HEIGHT = 4;
 
     // === PUBLIC MEMBERS =====================================================
-    public boolean mEnabled;
-    public Size mTargetPartial;
-    public Size mTargetFull;
-    public Size mNormalPartial;
+    boolean mEnabled;
+    Size mTargetPartial;
+    Size mTargetFull;
+    Size mNormalPartial;
 
     // === PUBLIC METHODS =====================================================
     public CustomIndicatorSizes() {
@@ -46,6 +54,23 @@ public class CustomIndicatorSizes {
         mNormalPartial = n_partial;
     }
 
+    public boolean getEnabled() {
+        return mEnabled;
+    }
+
+    public Size getTargetPartial() {
+        return mTargetPartial;
+    }
+
+    public Size getTargetFull() {
+        return mTargetFull;
+    }
+
+    public Size getNormalPartial() {
+        return mNormalPartial;
+    }
+
+    // === PUBLIC STATIC METHODS ==============================================
     public static CustomIndicatorSizes sanitize(CustomIndicatorSizes other) {
         if (other == null) {
             return new CustomIndicatorSizes();
@@ -67,6 +92,7 @@ public class CustomIndicatorSizes {
             other.mEnabled, sanitized_target_partial, sanitized_target_full, sanitized_normal_partial);
     }
 
+    // === PRIVATE STATIC METHODS ============================================= 
     static Size sanitizeSize(Size size, int default_width, int default_height) {
         if (size == null) {
             return new Size(default_width, default_height);
