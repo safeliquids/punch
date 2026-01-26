@@ -17,6 +17,9 @@
 	"entrypoints":{
 		"client": [
 			"me.safeliquids.mcmods.punch.PunchClient"
+		],
+		"modmenu": [
+			"me.safeliquids.mcmods.punch.integration.ModMenu"
 		]
 	},
 	"mixins": [
@@ -28,10 +31,12 @@
 	"depends": {
 		"fabricloader": ">=${loader_version}",
 		"minecraft": [
-			"1.20.2",
-			"1.20.3",
-			"1.20.4"
+			"1.20.2"
 		],
 		"java": ">=17"
+	},
+	"suggests": {
+		"modmenu": ">=${modmenu_version}",
+		"cloth-config-fabric": ">=${cloth_version}"
 	}
 }
