@@ -20,6 +20,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public abstract class CrosshairRenderingMixin {
     private ConfigData mConfig = null;
+    private CustomIndicatorSizes mCis;
+    private CustomIndicatorSizes.Size mTargetPartial;
+    private CustomIndicatorSizes.Size mTargetFull;
+    private CustomIndicatorSizes.Size mNormalPartial;
 
     /**
      * Caches current mod configuration.
@@ -28,10 +32,11 @@ public abstract class CrosshairRenderingMixin {
         method="renderCrosshair(Lnet/minecraft/client/gui/DrawContext;)V",
         at=@At("HEAD"))
     private void onRenderCrosshair(DrawContext context, CallbackInfo ci) {
-        ConfigData newConfig = PunchClient.getConfig();
-        if (mConfig == null || mConfig != newConfig) {
-            mConfig = newConfig;
-        }
+        mConfig = PunchClient.getConfig();
+        mCis = mConfig.getCustomIndicatorSizes();
+        mTargetPartial = mCis.getTargetPartial();
+        mTargetFull = mCis.getTargetFull();
+        mNormalPartial = mCis.getNormalPartial();
     }
 
     /**
@@ -87,14 +92,12 @@ public abstract class CrosshairRenderingMixin {
             original.call(instance, texture, x, y, width, height);
             return;
         }
-        CustomIndicatorSizes cis = mConfig.getCustomIndicatorSizes();
-        if (!cis.getEnabled()) {
+        if (!mCis.getEnabled()) {
             original.call(instance, texture, x, y, width, height);
             return;
         }
-        CustomIndicatorSizes.Size target_full = cis.getTargetFull();
-        width = target_full.getWidth();
-        height = target_full.getHeight();
+        width = mTargetFull.getWidth();
+        height = mTargetFull.getHeight();
         // The x-position of the attack indicator is moved to the left of the center of the screen by half its
         // width. This line removes the hard-coded offset in Minecraft's code (8 because the vanilla width is 16)
         // and replaces it with a corresponding offset based on the custom width. (Here that is
@@ -125,8 +128,7 @@ public abstract class CrosshairRenderingMixin {
             original.call(instance, texture, x, y, width, height);
             return;
         }
-        CustomIndicatorSizes cis = mConfig.getCustomIndicatorSizes();
-        if (!cis.getEnabled()) {
+        if (!mCis.getEnabled()) {
             original.call(instance, texture, x, y, width, height);
             return;
         }
@@ -134,10 +136,10 @@ public abstract class CrosshairRenderingMixin {
         CustomIndicatorSizes.Size size;
         final MinecraftClient client = ((IMinecraftClientAccessor) this).getClient();
         if (client.targetedEntity != null && client.targetedEntity instanceof LivingEntity) {
-            size = cis.getTargetPartial();
+            size = mTargetPartial;
         }
         else {
-            size = cis.getNormalPartial();
+            size = mNormalPartial;
         }
         width = size.getWidth();
         height = size.getHeight();
@@ -168,8 +170,7 @@ public abstract class CrosshairRenderingMixin {
             original.call(instance, texture, texture_width, texture_height, start_u, start_v, x, y, width, height);
             return;
         }
-        CustomIndicatorSizes cis = mConfig.getCustomIndicatorSizes();
-        if (!cis.getEnabled()) {
+        if (!mCis.getEnabled()) {
             original.call(instance, texture, texture_width, texture_height, start_u, start_v, x, y, width, height);
             return;
         }
@@ -177,10 +178,10 @@ public abstract class CrosshairRenderingMixin {
         CustomIndicatorSizes.Size size;
         final MinecraftClient client = ((IMinecraftClientAccessor) this).getClient();
         if (client.targetedEntity != null && client.targetedEntity instanceof LivingEntity) {
-            size = cis.getTargetPartial();
+            size = mTargetPartial;
         }
         else {
-            size = cis.getNormalPartial();
+            size = mNormalPartial;
         }
         texture_width = size.getWidth();
         texture_height = size.getHeight();
